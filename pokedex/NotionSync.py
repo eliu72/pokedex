@@ -4,8 +4,6 @@ import requests
 import secrets
 import PokeDex
 
-DATABASE_ID = "15ec7b84d87a4a298abf1bf2e1f7287d"
-
 class NotionSync:
     def __init__(self):
         self.base_url = "https://api.notion.com/v1/pages/"
@@ -61,7 +59,7 @@ class NotionSync:
     def populate_db(self):
         responses = []
         default_data = {
-            "parent": { "database_id": DATABASE_ID },
+            "parent": { "database_id": secrets.DATABASE_ID },
             "properties": {}
         }
         for pokemon in self.poke_list:

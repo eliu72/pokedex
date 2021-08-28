@@ -13,10 +13,11 @@ Install Dependencies:
 ```poetry install```
 
 Populate your Notion Database
-1. Create a secrets.py file in the pokedex folder.
-2. On the first line, write ```KEY="<your-notion-integration-key>"```
-3. On the next line, write ```DATABASE_ID="<database_id>"```
-4. In the root of your repository, run the command ```poetry run python pokedex/NotionSync.py```
+1. Follow the instructions at https://developers.notion.com/docs to create an integration.
+2. Create a secrets.py file in the pokedex folder.
+3. On the first line, store your notion integration key by writing ```KEY="<your-notion-integration-key>"```
+4. On the next line, write ```DATABASE_ID="<database_id>"```
+5. In the root of your repository, run the command ```poetry run python pokedex/NotionSync.py```
 
 Finally, watch your database populate!
 

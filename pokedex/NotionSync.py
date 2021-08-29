@@ -3,6 +3,7 @@ import requests
 
 import secrets
 import PokeDex
+from PokeCard import PokeCard as card
 
 class NotionSync:
     def __init__(self):
@@ -27,32 +28,45 @@ class NotionSync:
                 }
             ]
         }
-        properties['Species'] = {
-            "select": {
-                "name": pokemon.species
+
+        select_attr = card.select_attr()
+        for attr in select_attr:
+            properties[attr.capitalize()] = {
+                "select": {
+                    "name": pokemon.attributes[attr]
+                }
             }
-        }
-        properties['Description'] = {
-            "rich_text": [{
-                "text": {
-                    "content": pokemon.description
-                }
-            }]
-        }
-        properties['Normal Abilities'] = {
-            "rich_text": [{
-                "text": {
-                    "content": ", ".join(pokemon.abilities_normal)
-                }
-            }]
-        }
-        properties['Hidden Abilities'] = {
-            "rich_text": [{
-                "text": {
-                    "content": ", ".join(pokemon.abilities_hidden)
-                }
-            }]
-        }
+
+        check_box_attr = card.check_box_attr()
+        for attr in check_box_attr:
+            properties[attr.capitalize()] = {
+                "checkbox": bool(pokemon.attributes[attr])
+            }
+
+        int_attr = card.int_attr()
+        for attr in int_attr:
+            properties[attr.capitalize()] = {
+                "number": int(pokemon.attributes[attr])
+            }
+        
+        rich_text_attr = card.rich_text_attr()
+        for attr in rich_text_attr:
+            properties[attr.capitalize()] = {
+                "rich_text": [{
+                    "text": {
+                        "content": pokemon.attributes[attr]
+                    }
+                }]
+            }
+        
+        multi_select_attr = card.multi_select_attr()
+        for attr in multi_select_attr:
+            multi_select = []
+            for name in pokemon.attributes[attr]:
+                multi_select.append({"name":name})
+            properties[attr.capitalize()] = {
+                "multi_select": multi_select
+            }
         return properties
 
 
@@ -78,6 +92,7 @@ class NotionSync:
             return 200
         else:
             return 400
+
 
 if __name__ == '__main__':
     notion = NotionSync()

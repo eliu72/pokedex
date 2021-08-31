@@ -5,6 +5,9 @@ Want to access all your favourite Pokémon in one place? Look no further!
 This repo pulls Pokémon info from the https://pokeapi.glitch.me API and displays it onto a Notion database
 for easy and aestetically pleasing viewing.
 
+## ✨ Check out the Live Notion
+Check it out here: https://bit.ly/3mIJk29
+
 ## 📖 Getting Started
 If you don't already use poetry for python package maangement:
 ```pip install poetry```
